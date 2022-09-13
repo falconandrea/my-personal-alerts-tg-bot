@@ -27,3 +27,8 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`)
 })
+
+// Enable graceful stop
+process.on('SIGTERM', () => process.exit(0))
+process.on('SIGINT', () => process.exit(0))
+process.on('SIGHUP', () => process.exit(0))
