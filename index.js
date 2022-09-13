@@ -20,8 +20,7 @@ if (!webHookUrl) {
   console.error('Missing WEBHOOK_BASE_URL in env file')
   process.exit(1)
 }
-const bot = startBot(process.env.BOT_TOKEN)
-bot.launch().then(() => console.log('🚀 Started!'))
+const bot = startBot(botToken, webHookUrl)
 
 // Start server
 const PORT = process.env.PORT || 3000
