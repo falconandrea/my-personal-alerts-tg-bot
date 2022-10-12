@@ -1,9 +1,8 @@
+const { ObjectId } = require('mongoose').Types
 const Model = require('../models/user.model')
 
 // Validator function
-const { ObjectId } = require('mongoose').Types
-
-isValidObjectId = (id) => {
+const isValidObjectId = (id) => {
   if (ObjectId.isValid(id)) {
     if (String(new ObjectId(id)) === id) {
       return true

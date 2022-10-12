@@ -51,7 +51,7 @@ module.exports.startBot = (token, webhookBaseUrl) => {
       )
     }
 
-    ctx.reply(
+    return ctx.reply(
       messages[ctx.message.from.language_code]
         ? messages[ctx.message.from.language_code].correct_register
         : messages.en.correct_register
