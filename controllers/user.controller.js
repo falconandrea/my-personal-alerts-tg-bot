@@ -1,10 +1,13 @@
 const Model = require('../models/user.model')
 
 // Validator function
-const ObjectId = require('mongoose').Types.ObjectId
+const { ObjectId } = require('mongoose').Types
+
 function isValidObjectId (id) {
   if (ObjectId.isValid(id)) {
-    if ((String)(new ObjectId(id)) === id) { return true }
+    if (String(new ObjectId(id)) === id) {
+      return true
+    }
     return false
   }
   return false
@@ -25,16 +28,12 @@ const create = async (data) => {
     id: data.id,
     username: data.username,
     first_name: data.first_name,
-    language:
-      data.language_code ? data.language_code : 'it'
+    language: data.language_code ? data.language_code : 'it'
   })
-  await result.save()
-    .catch(err => {
-      return {
-        status: 500,
-        message: err.message || 'Some error occurred while saving the user'
-      }
-    })
+  await result.save().catch((err) => ({
+    status: 500,
+    message: err.message || 'Some error occurred while saving the user'
+  }))
   return { status: 200, message: 'Created' }
 }
 
