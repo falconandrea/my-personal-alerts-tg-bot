@@ -1,0 +1,7 @@
+{
+  "welcome": "Welcome, use /help command to know what you can do",
+  "help": "Use /register command to register here and save your preferences",
+  "just_registered": "You are already registered",
+  "general_error": "Error",
+  "correct_register": "User registered, now can use the service"
+}
