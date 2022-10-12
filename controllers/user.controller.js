@@ -3,7 +3,7 @@ const Model = require('../models/user.model')
 // Validator function
 const { ObjectId } = require('mongoose').Types
 
-function isValidObjectId (id) {
+isValidObjectId = (id) => {
   if (ObjectId.isValid(id)) {
     if (String(new ObjectId(id)) === id) {
       return true
