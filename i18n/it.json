@@ -6,8 +6,10 @@
   "correct_register": "Utente registrato, ora puoi usare il servizio",
   "need_register": "E' necessario prima registrarsi al servizio",
   "no_followed_channels": "Attualmente non stai seguendo nessun canale",
-  "need_channel_to_follow": "E' necessario specificare il canale da seguire",
+  "need_channel": "E' necessario specificare il canale",
   "just_followed": "Stai già seguendo questo canale",
   "channel_added": "Canale aggiunto correttamente",
-  "channels_followed": "Stai seguendo i seguenti canali:"
+  "channels_followed": "Stai seguendo i seguenti canali:",
+  "not_followed": "Non stai seguendo questo canale",
+  "channel_removed": "Canale rimosso correttamente"
 }

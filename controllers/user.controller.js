@@ -46,6 +46,16 @@ const follow = async (channel, id) => {
   return { status: 200, message: 'Updated' }
 }
 
+const unfollow = async (channel, id) => {
+  const result = await Model.findOne({id: id})
+  result.follow = result.follow.filter(item => item != channel)
+  await result.save().catch((err) => ({
+    status: 500,
+    message: err.message || 'Some error occurred while saving the user'
+  }))
+  return { status: 200, message: 'Updated' }
+}
+
 const search = async (data) => {
   const result = await Model.findOne(data)
   if (result) {
@@ -57,5 +67,6 @@ const search = async (data) => {
 module.exports = {
   search,
   create,
-  follow
+  follow,
+  unfollow
 }
