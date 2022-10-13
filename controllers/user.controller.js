@@ -36,8 +36,18 @@ const create = async (data) => {
   return { status: 200, message: 'Created' }
 }
 
+const follow = async (channel, id) => {
+  const result = await Model.findOne({id: id})
+  result.follow.push(channel)
+  await result.save().catch((err) => ({
+    status: 500,
+    message: err.message || 'Some error occurred while saving the user'
+  }))
+  return { status: 200, message: 'Updated' }
+}
+
 const search = async (data) => {
-  const result = await Model.find(data)
+  const result = await Model.findOne(data)
   if (result) {
     return { status: 200, message: 'Found', data: result }
   }
@@ -46,5 +56,6 @@ const search = async (data) => {
 
 module.exports = {
   search,
-  create
+  create,
+  follow
 }

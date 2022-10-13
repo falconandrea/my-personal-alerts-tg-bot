@@ -1,7 +1,13 @@
 {
   "welcome": "Benvenuto, usa il comando /help per sapere cosa puoi fare",
-  "help": "Usa il comando /register per registrarti e salvare le tue preferenze",
+  "help": "Usa il comando /register per registrarti e salvare le tue preferenze\nUsa il comando /follow NAME_CHANNEL per seguire un nuovo canale\nUsa il comando /list per vedere la lista dei canali che segui\nUsa il comando /unfollow NAME_CHANNEL per rimuovere un canale dalla tua lista",
   "just_registered": "Risulti già registrato",
   "general_error": "Errore",
-  "correct_register": "Utente registrato, ora puoi usare il servizio"
+  "correct_register": "Utente registrato, ora puoi usare il servizio",
+  "need_register": "E' necessario prima registrarsi al servizio",
+  "no_followed_channels": "Attualmente non stai seguendo nessun canale",
+  "need_channel_to_follow": "E' necessario specificare il canale da seguire",
+  "just_followed": "Stai già seguendo questo canale",
+  "channel_added": "Canale aggiunto correttamente",
+  "channels_followed": "Stai seguendo i seguenti canali:"
 }

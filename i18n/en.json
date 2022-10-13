@@ -1,7 +1,13 @@
 {
   "welcome": "Welcome, use /help command to know what you can do",
-  "help": "Use /register command to register here and save your preferences",
+  "help": "Use /register command to register here and save your preferences\nUse /follow NAME_CHANNEL command to follow a new channel\nUser /list commando to show your followed list channels\nUse /unfollow NAME_CHANNEL command for remove a channel from your list",
   "just_registered": "You are already registered",
   "general_error": "Error",
-  "correct_register": "User registered, now can use the service"
+  "correct_register": "User registered, now can use the service",
+  "need_register": "You must first register for the service",
+  "no_followed_channels": "Currently you aren't following any channels",
+  "need_channel_to_follow": "It is necessary to specify the channel to follow",
+  "just_followed": "You are already following this channel",
+  "channel_added": "Channel added successfully",
+  "channels_followed": "You are following this channels:"
 }
