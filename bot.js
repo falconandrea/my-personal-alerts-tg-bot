@@ -1,36 +1,29 @@
+const { count } = require('./models/user.model')
+const { getReplyText } = require('./utils')
+
 module.exports.startBot = (token, webhookBaseUrl) => {
   const { Telegraf } = require('telegraf')
   const bot = new Telegraf(token)
   const userController = require('./controllers/user.controller')
 
-  const messages = []
-  messages.it = require('./i18n/it.json')
-  messages.en = require('./i18n/en.json')
 
+
+  // Start command
   bot.start((ctx) => {
-    ctx.reply(
-      messages[ctx.message.from.language_code]
-        ? messages[ctx.message.from.language_code].welcome
-        : messages.en.welcome
-    )
-  })
-  bot.help((ctx) => {
-    ctx.reply(
-      messages[ctx.message.from.language_code]
-        ? messages[ctx.message.from.language_code].help
-        : messages.en.help
-    )
+    ctx.reply(getReplyText(ctx.message.from.language_code, 'welcome'))
   })
 
+  // Help command
+  bot.help((ctx) => {
+    ctx.reply(getReplyText(ctx.message.from.language_code, 'help'))
+  })
+
+  // Register to the service
   bot.command('register', async (ctx) => {
     // Check if user just saved in db
     const result = await userController.search({ id: ctx.message.from.id })
     if (result.status === 200 && result.data.length > 0) {
-      return ctx.reply(
-        messages[ctx.message.from.language_code]
-          ? messages[ctx.message.from.language_code].just_registered
-          : messages.en.just_registered
-      )
+      return ctx.reply(getReplyText(ctx.message.from.language_code, 'just_registered'))
     }
 
     // Save user data in db
@@ -43,19 +36,11 @@ module.exports.startBot = (token, webhookBaseUrl) => {
 
     if (userResult.status !== 200) {
       return ctx.reply(
-        `${
-          messages[ctx.message.from.language_code]
-            ? messages[ctx.message.from.language_code].general_error
-            : messages.en.general_error
-        }: ${userResult.message}`
+        `${getReplyText(ctx.message.from.language_code, 'general_error')}: ${userResult.message}`
       )
     }
 
-    return ctx.reply(
-      messages[ctx.message.from.language_code]
-        ? messages[ctx.message.from.language_code].correct_register
-        : messages.en.correct_register
-    )
+    return ctx.reply(getReplyText(ctx.message.from.language_code, 'correct_register'))
   })
 
   bot.launch().then(() => console.log('🚀 Bot started!'))
