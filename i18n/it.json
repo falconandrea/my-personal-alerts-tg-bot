@@ -1,6 +1,6 @@
 {
   "welcome": "Benvenuto, usa il comando /help per sapere cosa puoi fare",
-  "help": "Usa il comando /register per registrarti e salvare le tue preferenze\nUsa il comando /follow NAME_CHANNEL per seguire un nuovo canale\nUsa il comando /list per vedere la lista dei canali che segui\nUsa il comando /unfollow NAME_CHANNEL per rimuovere un canale dalla tua lista",
+  "help": "Usa il comando /register per registrarti e salvare le tue preferenze\nUsa il comando /follow NAME_CHANNEL per seguire un nuovo canale\nUsa il comando /list per vedere la lista dei canali che segui\nUsa il comando /unfollow NAME_CHANNEL per rimuovere un canale dalla tua lista\nUsa il cmoando /check per vedere quali dei canali che segui sono in live",
   "just_registered": "Risulti già registrato",
   "general_error": "Errore",
   "correct_register": "Utente registrato, ora puoi usare il servizio",

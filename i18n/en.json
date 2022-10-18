@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome, use /help command to know what you can do",
-  "help": "Use /register command to register here and save your preferences\nUse /follow NAME_CHANNEL command to follow a new channel\nUser /list commando to show your followed list channels\nUse /unfollow NAME_CHANNEL command for remove a channel from your list",
+  "help": "Use /register command to register here and save your preferences\nUse /follow NAME_CHANNEL command to follow a new channel\nUse /list command to show your followed list channels\nUse /unfollow NAME_CHANNEL command to remove a channel from your list\nUse /check command to see which of the channels you follow are live",
   "just_registered": "You are already registered",
   "general_error": "Error",
   "correct_register": "User registered, now can use the service",
