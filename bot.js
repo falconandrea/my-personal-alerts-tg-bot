@@ -1,4 +1,5 @@
 const { getReplyText } = require('./utils')
+const { checkLive } = require('./twitch')
 
 module.exports.startBot = (token, webhookBaseUrl) => {
   const { Telegraf } = require('telegraf')
@@ -13,6 +14,39 @@ module.exports.startBot = (token, webhookBaseUrl) => {
   // Help command
   bot.help((ctx) => {
     ctx.reply(getReplyText(ctx.message.from.language_code, 'help'))
+  })
+
+  // Check channel is live
+  bot.command('check', async (ctx) => {
+    // Check if user is registered
+    const result = await userController.search({ id: ctx.message.from.id })
+    if ((result.status === 200 && !result.data) || result.status === 500) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_register')
+      )
+    }
+
+    // Check list of channels
+    const channels = result.data.follow
+    if (channels.length === 0) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'no_followed_channels')
+      )
+    }
+
+    const inLive = await checkLive(channels)
+    if (inLive.length === 0) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'no_channels_live')
+      )
+    }
+
+    return ctx.reply(
+      `${getReplyText(
+        ctx.message.from.language_code,
+        'channels_live'
+      )} ${inLive.join(', ')}`
+    )
   })
 
   // Register to the service
@@ -88,7 +122,7 @@ module.exports.startBot = (token, webhookBaseUrl) => {
       !ctx.message.text.split(' ')[1]
     ) {
       return ctx.reply(
-        getReplyText(ctx.message.from.language_code, 'need_channel_to_follow')
+        getReplyText(ctx.message.from.language_code, 'need_channel')
       )
     }
 

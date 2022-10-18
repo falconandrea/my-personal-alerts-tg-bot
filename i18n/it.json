@@ -11,5 +11,7 @@
   "channel_added": "Canale aggiunto correttamente",
   "channels_followed": "Stai seguendo i seguenti canali:",
   "not_followed": "Non stai seguendo questo canale",
-  "channel_removed": "Canale rimosso correttamente"
+  "channel_removed": "Canale rimosso correttamente",
+  "no_channels_live": "Attualmente nessun canale che segui è in live",
+  "channels_live": "Attualmente i canali in live sono: "
 }
