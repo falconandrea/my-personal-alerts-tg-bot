@@ -22,6 +22,19 @@ lt --port 5123
 
 Insert the url inside `WEBHOOK_BASE_URL` field in `.env` file.
 
+## For testing the bot in local
+
+```
+npm run dev
+```
+
+### Others commands npm
+
+```
+npm run prettier
+npm run eslint
+```
+
 ## Bot commands
 
 ```
