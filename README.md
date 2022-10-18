@@ -1,5 +1,7 @@
 # My personal Telegram bot for alerts
 
+![Alt text](example-gif.gif)
+
 ## How to get BOT_TOKEN
 
 Contact [@BotFather](http://telegram.me/BotFather) on telegram for create a new bot and receive the token. Enter the token in the `BOT_TOKEN` field in `.env` file.
