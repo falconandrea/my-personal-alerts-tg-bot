@@ -1,4 +1,3 @@
-const { count } = require('./models/user.model')
 const { getReplyText } = require('./utils')
 
 module.exports.startBot = (token, webhookBaseUrl) => {
@@ -21,7 +20,9 @@ module.exports.startBot = (token, webhookBaseUrl) => {
     // Check if user just saved in db
     const result = await userController.search({ id: ctx.message.from.id })
     if (result.status === 200 && result.data) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'just_registered'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'just_registered')
+      )
     }
 
     // Save user data in db
@@ -34,11 +35,15 @@ module.exports.startBot = (token, webhookBaseUrl) => {
 
     if (userResult.status !== 200) {
       return ctx.reply(
-        `${getReplyText(ctx.message.from.language_code, 'general_error')}: ${userResult.message}`
+        `${getReplyText(ctx.message.from.language_code, 'general_error')}: ${
+          userResult.message
+        }`
       )
     }
 
-    return ctx.reply(getReplyText(ctx.message.from.language_code, 'correct_register'))
+    return ctx.reply(
+      getReplyText(ctx.message.from.language_code, 'correct_register')
+    )
   })
 
   // List channels followed
@@ -46,14 +51,25 @@ module.exports.startBot = (token, webhookBaseUrl) => {
     // Check if user is registered
     const result = await userController.search({ id: ctx.message.from.id })
     if ((result.status === 200 && !result.data) || result.status === 500) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'need_register'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_register')
+      )
     }
 
     // Check list of channels
     const channels = result.data.follow
-    if(channels.length === 0) return ctx.reply(getReplyText(ctx.message.from.language_code, 'no_followed_channels'))
+    if (channels.length === 0) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'no_followed_channels')
+      )
+    }
 
-    ctx.reply(`${getReplyText(ctx.message.from.language_code, 'channels_followed')} ${channels.join(', ')}`)
+    return ctx.reply(
+      `${getReplyText(
+        ctx.message.from.language_code,
+        'channels_followed'
+      )} ${channels.join(', ')}`
+    )
   })
 
   // Follow new channel
@@ -61,12 +77,19 @@ module.exports.startBot = (token, webhookBaseUrl) => {
     // Check if user is registered
     const result = await userController.search({ id: ctx.message.from.id })
     if ((result.status === 200 && !result.data) || result.status === 500) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'need_register'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_register')
+      )
     }
 
     // Check channel to follow
-    if(ctx.message.text.split(' ').length <= 1 || !ctx.message.text.split(' ')[1]) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'need_channel_to_follow'))
+    if (
+      ctx.message.text.split(' ').length <= 1 ||
+      !ctx.message.text.split(' ')[1]
+    ) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_channel_to_follow')
+      )
     }
 
     const newChannel = ctx.message.text.split(' ')[1]
@@ -74,12 +97,16 @@ module.exports.startBot = (token, webhookBaseUrl) => {
 
     // Check if you just following the channel
     if (channels.includes(newChannel)) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'just_followed'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'just_followed')
+      )
     }
 
     // Add channel to followed channales and save into db
     await userController.follow(newChannel, result.data.id)
-    ctx.reply(getReplyText(ctx.message.from.language_code, 'channel_added'))
+    return ctx.reply(
+      getReplyText(ctx.message.from.language_code, 'channel_added')
+    )
   })
 
   // Unfollow new channel
@@ -87,12 +114,19 @@ module.exports.startBot = (token, webhookBaseUrl) => {
     // Check if user is registered
     const result = await userController.search({ id: ctx.message.from.id })
     if ((result.status === 200 && !result.data) || result.status === 500) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'need_register'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_register')
+      )
     }
 
     // Check channel to unfollow
-    if(ctx.message.text.split(' ').length <= 1 || !ctx.message.text.split(' ')[1]) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'need_channel'))
+    if (
+      ctx.message.text.split(' ').length <= 1 ||
+      !ctx.message.text.split(' ')[1]
+    ) {
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'need_channel')
+      )
     }
 
     const newChannel = ctx.message.text.split(' ')[1]
@@ -100,12 +134,16 @@ module.exports.startBot = (token, webhookBaseUrl) => {
 
     // Check if you are following the channel
     if (!channels.includes(newChannel)) {
-      return ctx.reply(getReplyText(ctx.message.from.language_code, 'not_followed'))
+      return ctx.reply(
+        getReplyText(ctx.message.from.language_code, 'not_followed')
+      )
     }
 
     // Remove channel to followed channales and save into db
     await userController.unfollow(newChannel, result.data.id)
-    ctx.reply(getReplyText(ctx.message.from.language_code, 'channel_removed'))
+    return ctx.reply(
+      getReplyText(ctx.message.from.language_code, 'channel_removed')
+    )
   })
 
   // Start bot

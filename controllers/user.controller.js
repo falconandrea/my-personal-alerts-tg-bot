@@ -1,16 +1,4 @@
-const { ObjectId } = require('mongoose').Types
 const Model = require('../models/user.model')
-
-// Validator function
-const isValidObjectId = (id) => {
-  if (ObjectId.isValid(id)) {
-    if (String(new ObjectId(id)) === id) {
-      return true
-    }
-    return false
-  }
-  return false
-}
 
 const create = async (data) => {
   if (!data.id) {
@@ -37,7 +25,7 @@ const create = async (data) => {
 }
 
 const follow = async (channel, id) => {
-  const result = await Model.findOne({id: id})
+  const result = await Model.findOne({ id })
   result.follow.push(channel)
   await result.save().catch((err) => ({
     status: 500,
@@ -47,8 +35,8 @@ const follow = async (channel, id) => {
 }
 
 const unfollow = async (channel, id) => {
-  const result = await Model.findOne({id: id})
-  result.follow = result.follow.filter(item => item != channel)
+  const result = await Model.findOne({ id })
+  result.follow = result.follow.filter((item) => item !== channel)
   await result.save().catch((err) => ({
     status: 500,
     message: err.message || 'Some error occurred while saving the user'
